@@ -1,7 +1,7 @@
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 
 const userController = {
-    // get all users
+    // GET all users
     getAllUser(req, res) {
         User.find({})
             .sort({ _id: -1 })
@@ -11,7 +11,7 @@ const userController = {
                 res.status(400).json(err)
             });
     },
-    // get one user
+    // GET one user
     getOneUser({ params }, res) {
         User.findOne({ _id: params.id })
             .populate({
@@ -25,7 +25,7 @@ const userController = {
             .select('-__v')
             .then(user => {
                 if (!user) {
-                    res.status(404).json({ message: 'No pizza found with this id!' });
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
                 res.json(user);
@@ -35,7 +35,7 @@ const userController = {
                 res.status(400).json(err);
             });
     },
-    // create users
+    // POST users
     createUser({ body }, res) {
         User.create(body)
             .then(user => res.json(user))
@@ -44,7 +44,7 @@ const userController = {
                 res.status(400).json(err)
             });
     },
-    // update user
+    // PUT (update) user
     updateUser({ params, body }, res) {
         User.findByIdAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
             .then(user => {
@@ -59,6 +59,7 @@ const userController = {
                 res.status(400).json(err)
             });
     },
+    // DELETE user
     deleteUser({ params }, res) {
         User.findOneAndDelete({ _id: params.id })
             .then(user => {
@@ -73,6 +74,7 @@ const userController = {
                 res.status(400).json(err)
             });
     },
+    // (PUT) add another user as a friend
     addFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.id },
@@ -96,6 +98,7 @@ const userController = {
                 res.status(400).json(err)
             });
     },
+    // DELETE another user from friends list
     deleteFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.id },
