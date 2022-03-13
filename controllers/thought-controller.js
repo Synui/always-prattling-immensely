@@ -38,21 +38,20 @@ const thoughtController = {
     },
     // POST a thought to specified user
     createThought({ params, body }, res) {
-        console.log(body);
         Thought.create(body)
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
-                    { _id: params.userId },
+                    { username: body.username },
                     { $push: { thoughts: _id } },
                     { new: true }
                 );
             })
-            .then(thought => {
-                if (!thought) {
-                    res.status(404).json({ message: 'No thoughts found with this id!' });
+            .then(user => {
+                if (!user) {
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
-                res.json(thought);
+                res.json(user);
             })
             .catch(err => {
                 console.log(err);
@@ -75,24 +74,13 @@ const thoughtController = {
             });
     },
     // DELETE a thought
-    deleteThought({ params }, res) {
+    deleteThought({ params, body }, res) {
         Thought.findByIdAndDelete({ _id: params.id })
-            .then(thought => {
-                if (!thought) {
+            .then(deleteThought => {
+                if (!deleteThought) {
                     return res.status(404).json({ message: 'No thought found with this id!' });
                 }
-                return User.findOneAndUpdate(
-                    { _id: params.userId },
-                    { $pull: { thoughts: params.thoughtId } },
-                    { new: true }
-                );
-            })
-            .then(user => {
-                if (!user) {
-                    res.status(404).json({ message: 'No user found with this id!' });
-                    return;
-                }
-                res.json(thought);
+                res.json(deleteThought);
             })
             .catch(err => {
                 console.log(err);
