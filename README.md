@@ -37,4 +37,4 @@ Once installation is complete you can test the database either from:
 * Moment
 
 ## Video
-![Video](utils/)
+![Video](utils/always-prattling-immensely-video.gif)
