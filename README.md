@@ -1,15 +1,40 @@
-# always-prattling-immensely
+# Always Prattling Immensely: A Social Media API
 
-AS A social media startup
-I WANT an API for my social network that uses a NoSQL database
-SO THAT my website can handle large amounts of unstructured data
+## Table of Contents
+  * [Description](#description)
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Technologies](#technologies)
+  * [Video](#video)
 
-GIVEN a social network API
-WHEN I enter the command to invoke the application
-THEN my server is started and the Mongoose models are synced to the MongoDB database
-WHEN I open API GET routes in Insomnia for users and thoughts
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia
-THEN I am able to successfully create, update, and delete users and thoughts in my database
-WHEN I test API POST and DELETE routes in Insomnia
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+## Description
+This social media application collects:
+* user information
+* friend's of users (based on user information)
+* thoughts implemented from the users
+* reactions to said thoughts
+
+ Utilizing NoSQL databases, i.e. MongoDB, in conjuntion with Mongoose to create a dynamic and less rigid database that requires less planning to execute. At the moment it is only utilized for backend purposes, such as testing in localhost:3001 or through Insomnia.
+
+## Installation
+* Clone Github repository
+* Make sure MongoDB is installed into your computer
+* In terminal run: <code>npm init</code>
+* In terminal run: <code>npm start</code>
+
+## Usage
+Once installation is complete you can test the database either from:
+* Web browser through localhost:3001
+* Applications like Insomnia that test routes
+
+
+## Technologies
+* Express
+* MongoDB
+* Mongoose
+* Node
+* Nodemon (for server updating purposes)
+* Moment
+
+## Video
+![Video](utils/)
